@@ -27,6 +27,7 @@ var combinationSum = function (candidates, target) {
       for (let j = 0; j < candidates.length; j++) {
         if (candidates[j] === current) {
           temp.push(candidates[i], candidates[j]);
+        } else {
         }
       }
     }
