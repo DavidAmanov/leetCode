@@ -15,21 +15,28 @@
 // 7 is a candidate, and 7 = 7.
 // These are the only two combinations.
 
-let candidates = [2, 3, 6, 7],
-  target = 7;
+let candidates = [2, 3, 5],
+  target = 8;
 var combinationSum = function (candidates, target) {
   let result = [];
-  let current = target;
-  for (let i = 0; i < candidates.length; i++) {
-    let temp = [];
-    current = current - candidates[i];
-    if (current > 0) {
-      for (let j = 0; j < candidates.length; j++) {
-        if (candidates[j] === current) {
-          temp.push(candidates[i], candidates[j]);
-        } else {
-        }
-      }
+  function check(temp, start, target) {
+    if (target < 0) {
+      return;
+    }
+    if (target === 0) {
+      result.push([...temp]);
+      return;
+    }
+
+    for (let i = start; i < candidates.length; i++) {
+      temp.push(candidates[i]);
+      check(temp, i, target - candidates[i]);
+      temp.pop();
     }
   }
+
+  check([], 0, target);
+  return result;
 };
+
+console.log(combinationSum(candidates, target));
