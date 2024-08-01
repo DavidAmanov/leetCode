@@ -12,16 +12,44 @@
 // Input: nums = [1,2,3,1], k = 2
 // Output: false
 
-let nums = [1, 2, 3, 1, 2, 3],
-  k = 2;
+let nums = [1, 0, 1, 1],
+  k = 1;
+// var containsNearbyDuplicate = function (nums, k) {
+//   let map = new Map();
+//   for (let i = 0; i < nums.length; i++) {
+//     if (map.has(nums[i])) {
+//       map.set(nums[i], [...map.get(nums[i]), i]); // проверку можно сделать тут
+//     } else {
+//       map.set(nums[i], [i]);
+//     }
+//   }
+//   console.log(map);
+//   for (let j = 0; j < nums.length; j++) {
+//     for (let g = 0; g < map.get(nums[j]).length; g++) {
+//       let cur = Math.abs(map.get(nums[j])[g] - map.get(nums[j])[g + 1]);
+//       console.log(cur);
+//       if (cur <= k) {
+//         console.log(cur);
+//         return true;
+//       }
+//     }
+//   }
+//   return false;
+// };
+
+// console.log(containsNearbyDuplicate(nums, k));
+//решение не оптимальное, я выполняю как оказалось лишнее действие
+
 var containsNearbyDuplicate = function (nums, k) {
+  let map = new Map();
   for (let i = 0; i < nums.length; i++) {
-    for (let j = i + 1; j < nums.length; j++) {
-      console.log(i, j, Math.abs(i - j));
-      if (nums[i] == nums[j] && Math.abs(i - j) <= k) {
+    if (map.has(nums[i])) {
+      //абсолютно гениальный мув
+      if (Math.abs(i - map.get(nums[i])) <= k) {
         return true;
       }
     }
+    map.set(nums[i], i);
   }
   return false;
 };
