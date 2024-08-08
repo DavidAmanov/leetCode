@@ -5,4 +5,20 @@
 // выбрасывать кирпичи в море через это отвертсие, если стороны
 // кирпича должны быть параллельны сторонам отвертсия
 
-function checkTheSize() {}
+let A = 10,
+  B = 20,
+  C = 30,
+  D = 15,
+  E = 20;
+function checkTheSize(A, B, C, D, E) {
+  //поиск самых маленьких сторон кирпича
+  let arr = [A, B, C].sort((a, b) => a - b);
+  //теперь мы знаем что самые маленькие стороны кирпича будут занимать 0 и 1 индекс в массиве
+  let arr1 = [D, E].sort((a, b) => a - b);
+  if (arr[0] <= arr[1] && arr[1] <= arr1[1]) {
+    return true;
+  }
+  return false;
+}
+
+console.log(checkTheSize(A, B, C, D, E));
