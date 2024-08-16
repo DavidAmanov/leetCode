@@ -73,3 +73,61 @@
 // Массив слов, например: ["apple", "banana", "kiwi", "grape", "strawberry", "orange", "plum"]
 // Выход:
 // Отсортированный массив слов по длине, например: ["kiwi", "plum", "grape", "apple", "orange", "banana", "strawberry"]
+
+// function sortWords(words) {
+//   if (words.length < 2) {
+//     return words;
+//   } else {
+//     let pivot = words[0].length;
+//     let less = words.slice(1).filter((item) => item.length <= pivot);
+//     let greater = words.slice(1).filter((item) => item.length > pivot);
+//     return [...sortWords(less), words[0], ...sortWords(greater)];
+//   }
+// }
+
+// console.log(
+//   sortWords([
+//     "apple",
+//     "banana",
+//     "kiwi",
+//     "grape",
+//     "strawberry",
+//     "orange",
+//     "plum",
+//   ])
+// );
+
+// Условия:
+// Массив содержит объекты, каждый из которых имеет два поля: title (название статьи) и date (дата публикации в формате YYYY-MM-DD).
+// Реализуйте алгоритм быстрой сортировки самостоятельно.
+// После сортировки верните отсортированный массив статей.
+
+// let dates = [
+//   { title: "React Basics", date: "2023-07-21" },
+//   { title: "Advanced JavaScript", date: "2022-11-10" },
+//   { title: "Web Development Trends", date: "2023-05-15" },
+//   { title: "Understanding TypeScript", date: "2022-01-22" },
+//   { title: "CSS Grid and Flexbox", date: "2023-02-11" },
+// ];
+
+// function sortDates(dates) {
+//   let entries = dates.map((item) => Object.entries(item));
+//   function qSort(entries) {
+//     if (entries.length < 2) {
+//       return entries;
+//     } else {
+//       let pivot = new Date(entries[0][1][1]);
+//       let less = entries
+//         .slice(1)
+//         .filter((item) => new Date(item[1][1]) <= pivot);
+//       let greater = entries
+//         .slice(1)
+//         .filter((item) => new Date(item[1][1]) > pivot);
+//       return [...qSort(less), entries[0], ...qSort(greater)];
+//     }
+//   }
+//   let result = qSort(entries).map((item) => Object.fromEntries(item));
+//   return result;
+// }
+
+// console.log(sortDates(dates));
