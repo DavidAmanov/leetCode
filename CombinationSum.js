@@ -15,28 +15,42 @@
 // 7 is a candidate, and 7 = 7.
 // These are the only two combinations.
 
-let candidates = [2, 3, 5],
-  target = 8;
+// let candidates = [2, 3, 5],
+//   target = 8;
 var combinationSum = function (candidates, target) {
   let result = [];
-  function check(temp, start, target) {
-    if (target < 0) {
-      return;
-    }
-    if (target === 0) {
+  function check(remain, temp, start) {
+    if (remain === 0) {
       result.push([...temp]);
       return;
     }
-
+    if (remain < 0) {
+      return;
+    }
     for (let i = start; i < candidates.length; i++) {
       temp.push(candidates[i]);
-      check(temp, i, target - candidates[i]);
+      check(remain - candidates[i], temp, i);
       temp.pop();
     }
   }
-
-  check([], 0, target);
+  check(target, [], 0);
   return result;
 };
 
-console.log(combinationSum(candidates, target));
+// console.log(combinationSum(candidates, target));
+
+let nums = [5, 2, 11, 7, 15];
+let target = 9;
+
+function findSum(nums, target) {
+  let map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    if (map.has(target - nums[i])) {
+      return [i, map.get(target - nums[i])];
+    }
+    map.set(nums[i], i);
+  }
+  return [];
+}
+
+console.log(findSum(nums, target));
