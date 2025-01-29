@@ -193,53 +193,98 @@
 //   };
 // }
 
-function createTaskQueue(limit) {
-  let stack = [];
-  let running = 0;
+// function createTaskQueue(limit) {
+//   let stack = [];
+//   let running = 0;
 
-  function runningTask() {
-    if (running < limit && stack.length > 0) {
-      running++;
-      const task = stack.shift();
-      task().then(() => {
-        running--;
-        runningTask();
-      });
-    }
-  }
+//   function runningTask() {
+//     if (running < limit && stack.length > 0) {
+//       running++;
+//       const task = stack.shift();
+//       task().then(() => {
+//         running--;
+//         runningTask();
+//       });
+//     }
+//   }
 
-  return {
-    addTask(task) {
-      stack.push(task);
-    },
-    runTask() {
-      while (running < limit) {
-        running++;
-        runningTask();
-      }
-    },
+//   return {
+//     addTask(task) {
+//       stack.push(task);
+//     },
+//     runTask() {
+//       while (running < limit) {
+//         running++;
+//         runningTask();
+//       }
+//     },
+//   };
+// }
+
+// const taskQueue = createTaskQueue(5);
+// taskQueue.addTask(
+//   () =>
+//     new Promise((resolve) =>
+//       setTimeout(() => resolve("Task 1 completed"), 1000)
+//     )
+// );
+// taskQueue.addTask(
+//   () =>
+//     new Promise((resolve) => setTimeout(() => resolve("Task 2 completed"), 500))
+// );
+// taskQueue.addTask(
+//   () =>
+//     new Promise((resolve) =>
+//       setTimeout(() => resolve("Task 3 completed"), 2000)
+//     )
+// );
+// taskQueue.addTask(
+//   () =>
+//     new Promise((resolve) => setTimeout(() => resolve("Task 4 completed"), 300))
+// );
+// console.log(taskQueue.runTask());
+
+// const debounce = (fn) => {
+//   let timer;
+//   return function (...args) {
+//     clearTimeout(timer);
+//     timer = setTimeout(() => fn(...args), 2000);
+// //   };
+// };
+
+// const debouncedLog = debounce(() => console.log("popa"));
+
+// debouncedLog();
+// debouncedLog();
+// debouncedLog();
+// const try2 = () => setTimeout(() => debouncedLog(), 4000);
+// try2();
+
+// const throttling = (fn, interval) => {
+//   let startTime = new Date().getTime();
+//   return function (...args) {
+//     console.log(startTime);
+//     let currentTime = new Date().getTime();
+//     if (currentTime - startTime >= interval) {
+//       fn(...args);
+//       startTime = currentTime;
+//     }
+//   };
+// };
+
+// const trottledLog = throttling(() => console.log("jopa"), 100);
+
+// trottledLog();
+// trottledLog();
+
+// setTimeout(() => trottledLog(), 300);
+
+function sum(first) {
+  return function (second) {
+    return first + second;
   };
 }
 
-const taskQueue = createTaskQueue(5);
-taskQueue.addTask(
-  () =>
-    new Promise((resolve) =>
-      setTimeout(() => resolve("Task 1 completed"), 1000)
-    )
-);
-taskQueue.addTask(
-  () =>
-    new Promise((resolve) => setTimeout(() => resolve("Task 2 completed"), 500))
-);
-taskQueue.addTask(
-  () =>
-    new Promise((resolve) =>
-      setTimeout(() => resolve("Task 3 completed"), 2000)
-    )
-);
-taskQueue.addTask(
-  () =>
-    new Promise((resolve) => setTimeout(() => resolve("Task 4 completed"), 300))
-);
-console.log(taskQueue.runTask());
+const sumurry = sum(1);
+
+console.log(sumurry(2));
